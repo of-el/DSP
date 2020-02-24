@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1582494674 source:c:\users\v-avagui\desktop\dsp course\c projects\dft\waveforms.c
+
+1582495892 source:c:\users\v-avagui\desktop\dsp course\c projects\idft\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1582494674 source:c:\users\v-avagui\desktop\dsp course\c projects\idft\waveforms.c
+
