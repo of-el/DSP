@@ -1,0 +1,8 @@
+# Ignore all .wav files
+*.wav
+
+# Ignore venv
+*venv*
+
+# Ignore .idea folder
+*.idea
