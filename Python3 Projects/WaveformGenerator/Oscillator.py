@@ -13,17 +13,17 @@ class Oscillator:
         self.waveform = waveform
         self.harmonics = harmonics
         self.frequency = frequency
-        self.phase_shift = phase_shift
+        self.phase_shift = phase_shift / 360
         self.sampling_rate = sampling_rate
         self.duration = duration
         self.period = 1 / frequency
         self.samples = (duration * sampling_rate) + 1
-        self.phase = sampling_rate * self.period
+        self.phase = sampling_rate * self.period # how many samples per period
         self.xn = [None] * int(self.samples)
 
     def SineWave(self, i, harmonic):
 
-        val = (1 / harmonic) * math.sin((harmonic * 2 * math.pi * (i / self.phase)) + self.phase_shift)
+        val = (1 / harmonic) * math.sin(harmonic * 2 * math.pi * ((i - (self.sampling_rate * self.phase_shift)) / self.phase))
         return val
 
     def GenerateWaveform(self):
@@ -62,7 +62,7 @@ class Oscillator:
 
 def main():
 
-    osc = Oscillator(waveform="sin", frequency=2, phase_shift=0, sampling_rate=32, duration=1, harmonics=1)
+    osc = Oscillator(waveform="sin", frequency=4, phase_shift=0, sampling_rate=6, duration=1, harmonics=1)
     print("Generating waveform")
     osc.GenerateWaveform()
     print("Writing waveform to file")
