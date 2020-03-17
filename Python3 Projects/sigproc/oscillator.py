@@ -1,6 +1,5 @@
 import numpy
 import matplotlib.pyplot as plot
-import pandas
 import sys
 import math
 import scipy.io.wavfile
@@ -21,12 +20,12 @@ class Oscillator:
         self.phase = sampling_rate * self.period # how many samples per period
         self.xn = [None] * int(self.samples)
 
-    def SineWave(self, i, harmonic):
+    def sine_wave(self, i, harmonic):
 
         val = (1 / harmonic) * math.sin(harmonic * 2 * math.pi * ((i - (self.sampling_rate * self.phase_shift)) / self.phase))
         return val
 
-    def GenerateWaveform(self):
+    def generate_waveform(self):
 
         print("Num of samples : {}".format(self.samples))
         # Zero out all indices
@@ -52,23 +51,9 @@ class Oscillator:
 
         plot.ylim(-1, 1)
         plot.plot(numpy.arange(0, self.samples) / self.sampling_rate, self.xn, marker='o')
-        plot.show(block=False)
+        plot.show(block=True)
 
-    def WriteToWav(self, file):
+    def write_to_wav(self, file):
 
         data = numpy.asarray(self.xn)
         scipy.io.wavfile.write(file, self.sampling_rate, data)
-
-
-def main():
-
-    osc = Oscillator(waveform="sin", frequency=4, phase_shift=0, sampling_rate=6, duration=1, harmonics=1)
-    print("Generating waveform")
-    osc.GenerateWaveform()
-    print("Writing waveform to file")
-    osc.WriteToWav("{}_{}Hz_{}s_{}harmonics.wav".format(osc.waveform, osc.frequency, osc.duration, osc.harmonics))
-    plot.show()
-
-
-if __name__ == '__main__':
-    main()
