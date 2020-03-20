@@ -49,7 +49,10 @@ def _sine_wave(i, harmonic):
     return val
 
 
-def generate_waveform():
+def generate_waveform(**kwargs):
+
+    return_data = kwargs.get('ret', False)
+    plot_data = kwargs.get('plot', False)
 
     print("Generating {} waveform".format(_waveform))
     # Zero out all indices
@@ -71,10 +74,14 @@ def generate_waveform():
 #    else:
 #        sys.exit("Invalid waveform!")
 
-    print("Plotting waveform")
-    plot.ylim(-1, 1)
-    plot.plot(numpy.arange(0, _samples) / _sampling_rate, _xn, marker='o')
-    plot.show(block=True)
+    if plot_data is True:
+        print("Plotting waveform")
+        plot.ylim(-1, 1)
+        plot.plot(numpy.arange(0, _samples) / _sampling_rate, _xn, marker='o')
+        plot.show(block=True)
+
+    if return_data is True:
+        return _xn
 
 
 def write_to_wav(wav_file, **kwargs):
