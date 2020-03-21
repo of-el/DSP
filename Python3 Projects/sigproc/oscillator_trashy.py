@@ -54,7 +54,7 @@ def generate_waveform(**kwargs):
     return_data = kwargs.get('ret', False)
     plot_data = kwargs.get('plot', False)
 
-    print("Generating {} waveform".format(_waveform))
+    print("Generating {} waveform...".format(_waveform))
     # Zero out all indices
     for i in range(0, int(_samples)):
         _xn[i] = 0.0
@@ -74,13 +74,13 @@ def generate_waveform(**kwargs):
 #    else:
 #        sys.exit("Invalid waveform!")
 
-    if plot_data is True:
-        print("Plotting waveform")
+    if plot_data:
+        print("Plotting waveform...")
         plot.ylim(-1, 1)
         plot.plot(numpy.arange(0, _samples) / _sampling_rate, _xn, marker='o')
         plot.show(block=True)
 
-    if return_data is True:
+    if return_data:
         return _xn
 
 

@@ -7,14 +7,23 @@ import matplotlib.pyplot as plot
 def analyze(data, bins, sampling_rate):
 
     bins = bins + 1
-    out = [0.0] * bins
     samples = len(data)
+
+    out = [0.0] * bins
+    real = [0.0] * bins
+    imaginary = [0.0] * bins
 
     print("Applying DFT for spectral analysis")
     for m in range(bins):
         for n in range(samples):
-            out[m] = out[m] + (pow((data[n] * _real(n, m, bins)), 2) - pow((data[n] * _imaginary(n, m, bins)), 2))
-    
+            #out[m] = out[m] + (pow((data[n] * _real(n, m, bins)), 2) - pow((data[n] * _imaginary(n, m, bins)), 2))
+            real[m] = real[m] + (data[n] * _real(n, m, bins))
+            imaginary[m] = imaginary[m] - (data[n] * _imaginary(n, m, bins))
+        # Magnitude
+        out[m] = cmath.sqrt(pow(real[m], 2) + pow(imaginary[m], 2))
+        # Power (power = magnitude squared)
+        #out[m] = pow(real[m], 2) + pow(imaginary[m], 2)
+
     _plot_spectrum(out, bins, sampling_rate)
 
 
