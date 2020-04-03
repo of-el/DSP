@@ -5,10 +5,11 @@ import convolution as conv
 
 def main():
 
-    sr = 64
-    osc.init(waveform="sine", frequency=4, phase_shift=0, sampling_rate=sr,
-             duration=1, harmonics=1)
+    sr = 16000
+    osc.init(waveform="sine", amplitude=1, frequency=1000, phase_shift=0, sampling_rate=sr,
+             duration=10, harmonics=1)
     data = osc.generate_waveform(ret=True, plot=True)
+    osc.write_to_wav("Sine.wav")
     #impulse = conv.generate_impulse(sample_length=20)
     #print(impulse)
     #conv.convolve(data, impulse, sr, plot=True)

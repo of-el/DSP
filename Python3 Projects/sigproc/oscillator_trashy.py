@@ -7,6 +7,7 @@ import csv
 
 
 _waveform = "sine"
+_amplitude = 1
 _harmonics = 1
 _frequency = 1000
 _phase_shift = 0
@@ -18,9 +19,10 @@ _phase = _sampling_rate * _period
 _xn = [None] * int(_samples)
 
 
-def init(waveform, frequency, phase_shift, sampling_rate, duration, harmonics=1):
+def init(waveform, frequency, phase_shift, sampling_rate, duration, amplitude=1, harmonics=1):
 
     global _waveform
+    global _amplitude
     global _harmonics
     global _frequency
     global _phase_shift
@@ -32,6 +34,7 @@ def init(waveform, frequency, phase_shift, sampling_rate, duration, harmonics=1)
     global _xn
 
     _waveform = waveform
+    _amplitude = amplitude
     _harmonics = harmonics
     _frequency = frequency
     _phase_shift = phase_shift / 360
@@ -45,7 +48,7 @@ def init(waveform, frequency, phase_shift, sampling_rate, duration, harmonics=1)
 
 def _sine_wave(i, harmonic):
 
-    val = (1 / harmonic) * math.sin(harmonic * 2 * math.pi * ((i - (_sampling_rate * _phase_shift)) / _phase))
+    val = _amplitude * (1 / harmonic) * math.sin(harmonic * 2 * math.pi * ((i - (_sampling_rate * _phase_shift)) / _phase))
     return val
 
 
